@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="start"
+    android:layout_gravity="start"
+    android:layout_margin="@dimen/margin_20_dp"
+    android:id="@+id/feedback_layout"
+    tools:context=".TempClass">
+
+
+        <ImageButton
+            android:layout_margin="@dimen/margin_10_dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/like_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
+            android:padding="@dimen/margin_10_dp"
+            android:layout_marginBottom="@dimen/margin_20_dp"
+            android:foregroundGravity="left"
+            android:scaleType="fitCenter"
+            android:src="@drawable/thumbsup"
+            />
+
+        <ImageButton
+            android:layout_margin="@dimen/margin_10_dp"
+            android:padding="@dimen/margin_10_dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/dislike_btn"
+
+            android:layout_marginBottom="@dimen/margin_20_dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
+            android:foregroundGravity="right"
+            android:scaleType="fitCenter"
+            android:src="@drawable/thumbsdown"
+
+            />
+</LinearLayout>

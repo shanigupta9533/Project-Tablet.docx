@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/black"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:splitMotionEvents="false"
+    android:layout_width="500dp"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_margin="@dimen/space_8">
+
+
+    <EditText
+        android:background="@color/white"
+        android:id="@+id/edt_mob"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:textSize="20sp"
+        android:digits="0123456789"
+        android:maxLength="10"
+
+        android:hint="Enter Mobile No"
+        android:inputType="phone"
+        android:padding="@dimen/space_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <FrameLayout
+        android:layout_margin="@dimen/space_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_45_dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="@dimen/space_8"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:text="Submit"
+            android:textSize="18sp"
+
+            android:gravity="center"
+            android:layout_gravity="end"
+            android:background="@color/greenDark"
+            />
+
+        <Button
+            android:textColor="@color/white"
+            android:background="@color/gray"
+            android:id="@+id/buttonCancel"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="@dimen/space_8"
+            android:layout_marginTop="8dp"
+            android:text="Cancel"
+            />
+    </FrameLayout>
+
+    <com.dragosholbann.androidfacedetection.MyKeyboard
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center|bottom"
+        android:gravity="center|bottom"/>
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:padding="@dimen/margin_10_dp"
+    android:background="@color/black"
+    android:id="@+id/rl_scratch_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_marginBottom="@dimen/margin_20_dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:background="@drawable/background_circle_outercircle"
+        />
+    <TextView
+        android:layout_marginBottom="@dimen/margin_20_dp"
+        android:fontFamily="@font/titillium_regular"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:id="@+id/tv_scratch_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:text="Offer20" />
+
+    <ImageView
+        android:textColor="@color/white"
+        android:id="@+id/scratch_card_iv"
+        android:layout_width="200dp"
+        android:layout_height="@dimen/value_200_dp"
+        android:src="@drawable/paytm"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/value_200_dp"
+        />
+
+    <TextView
+        android:layout_marginTop="70dp"
+        android:textColor="@color/blue"
+        android:id="@+id/tv_scratch_card_desc"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="2"
+        android:minLines="2"
+        android:maxLines="3"
+        android:layout_gravity="center"
+        android:typeface="normal"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="Flat 40% off on all bookings before DIWALI" />
+
+
+    <TextView
+        android:fontFamily="@font/titillium_regular"
+        android:layout_marginTop="170dp"
+        android:textColor="@color/gray"
+        android:id="@+id/tv_scratch_card_expiry"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:typeface="normal"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="@string/expire_on" />
+
+
+    <com.anupkumarpanwar.scratchview.ScratchView
+        android:id="@+id/scratch_view_fragment"
+        android:layout_width="640dp"
+        android:layout_height="640dp"
+        android:layout_gravity="center"
+        app:overlay_image="@drawable/ss"
+        app:overlay_width="640dp"
+        app:overlay_height="640dp"
+        />
+
+    <!-- <in.myinnos.androidscratchcard.ScratchCard
+
+         app:scratchWidth="120dp"
+         app:scratchDrawable="@drawable/scratchh2"
+         android:id="@+id/scratch_card"
+         android:layout_width="700dp"
+         android:layout_height="500dp"
+         android:layout_gravity="center"
+         android:layout_centerInParent="true"/>-->
+
+
+</FrameLayout>
