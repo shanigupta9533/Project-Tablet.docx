@@ -32,7 +32,6 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -191,37 +190,26 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
     Thread thread;
     public final static int REQUEST_CODE = 5463;
     public final static int REQUEST_APP_UPDATE = 5544;
-      static DevicePolicyManager deviceManger;
-      static ComponentName compName;
+    static DevicePolicyManager deviceManger;
+    static ComponentName compName;
     PackageManager mPackageManager;
     CountDownTimer countDownTimer;
     ImageView iv_splash;
-    private int changePincode=0;
 
     @SuppressLint("MissingPermission")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         deviceManger = (DevicePolicyManager)getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         compName = new ComponentName(this, MyAdmin.class);
 
-        hideSystemUI(getWindow());
-        setContentView(R.layout.activity_splash);
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-        params.screenBrightness = 0.9f;
-        getWindow().setAttributes(params);
-
-        getWindow().addFlags ((int) WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        hideSystemUI(getWindow());
+        setContentView(R.layout.activity_splash);
 
         View decorView = getWindow().getDecorView();
         // Hide both the navigation bar and the status bar.
@@ -231,7 +219,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        
+
         initViews();
 
         mContext = SplashActivity.this;
@@ -240,6 +228,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
         Glide.with(mContext)
                 .load(R.drawable.logo_madads)
+
                 .into(iv_splash);
 
 
@@ -255,36 +244,9 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
     }
 
-    @Override
-    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-        return false;
-    }
 
-    private void changePincodeEvery10SecTesting() {
 
-        String[] pincodeString={"272152","272204","272153","272202","272205","272152"};
 
-        new CountDownTimer(10000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-
-                changePincode++;
-
-                if(changePincode>pincodeString.length-1)
-                    changePincode=1;
-
-                getDataFromPincode(pincodeString[changePincode]);
-                Log.i(TAG, "onTick: "+pincodeString[changePincode-1]);
-
-            }
-
-            public void onFinish() {
-
-            }
-
-        }.start();
-
-    }
 
     public static void hideSystemUI(Window window) {
         window.getDecorView().setSystemUiVisibility(
@@ -296,7 +258,9 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
 
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -305,8 +269,65 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 
-        return false;
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SOFT_LEFT) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SOFT_RIGHT) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SOFT_SLEEP) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SYSTEM_NAVIGATION_DOWN) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_SYSTEM_NAVIGATION_UP) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_STB_POWER) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_APP_SWITCH) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_POWER) {
+
+
+        }
+        else if (event.getKeyCode() == KeyEvent.KEYCODE_AVR_POWER) {
+
+
+        }
+
+
+        return true;
     }
 
     @Override
@@ -353,7 +374,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
     private int getVideoSize(String path){
 
-       // String filepath = Environment.getExternalStorageDirectory() + "/file.mp4";
+        // String filepath = Environment.getExternalStorageDirectory() + "/file.mp4";
 
         if(path!=null){
             File file = new File(path);
@@ -528,7 +549,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             mPackageManager.setComponentEnabledSetting(
                     new ComponentName(getApplicationContext(),
                             TempClass.class),
-                            //VideoFaceDetectionActivity.class),
+                    //VideoFaceDetectionActivity.class),
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP);
 
@@ -622,7 +643,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             deviceManger.addPersistentPreferredActivity(
                     compName, intentFilter, new ComponentName(
                             getPackageName(), TempClass.class.getName()));
-                          //  getPackageName(), VideoFaceDetectionActivity.class.getName()));
+            //  getPackageName(), VideoFaceDetectionActivity.class.getName()));
         } else {
             deviceManger.clearPackagePersistentPreferredActivities(
                     compName, getPackageName());
@@ -659,14 +680,13 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(mContext, "SPLASH ACTIVITY", Toast.LENGTH_SHORT).show();
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean checkDrawOverlayPermission() {
         /** check if we already  have permission to draw over other apps */
-        if (!Settings.canDrawOverlays(this)) {
+        if (!Settings.canDrawOverlays(mContext)) {
             /** if not construct intent to request permission */
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
@@ -713,7 +733,8 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         }
     }*/
 
-    private  void runtimePermissions() {
+    private  void runtimePermissions()
+    {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION
         ) != PackageManager.PERMISSION_GRANTED
@@ -864,12 +885,12 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                     //getCountry();
 
                 }else {*/
-                    getCity();
-                //}
-           // }
+            getCity();
+            //}
+            // }
             lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             assert lm != null;
-                                                //NETWORK_PROVIDER - > GPS_PROVIDER
+            //NETWORK_PROVIDER - > GPS_PROVIDER
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
             @SuppressLint("MissingPermission") Location gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(gps_loc!=null)
@@ -882,7 +903,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                 gps_loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 if(gps_loc!=null)
                 {
-                   // Toast.makeText(mContext, "gps_loc = NETWORK_PROVIDER", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(mContext, "gps_loc = NETWORK_PROVIDER", Toast.LENGTH_SHORT).show();
                     getLoc(gps_loc.getLatitude(),gps_loc.getLongitude());
                 }
             }
@@ -949,7 +970,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             // }
             lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             assert lm != null;
-                                                    //NETWORK_PROVIDER - > GPS_PROVIDER
+            //NETWORK_PROVIDER - > GPS_PROVIDER
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
             @SuppressLint("MissingPermission") Location gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if(gps_loc!=null)
@@ -1017,7 +1038,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 //
 //                } else {
 //                    //Toast.makeText(mContext, cab.getMessage(), Toast.LENGTH_SHORT).show();
-//                    
+//
 //                    //   setupViewPager(viewPager);
 //                }
 //            }
@@ -1025,7 +1046,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 //        @Override
 //        public void onError(Throwable e) {
 //            Log.d(TAG, "onError: getCabTabObserverModified >> " + e.toString());
-//            
+//
 //            Toast.makeText(mContext, ApplicationConstant.ANYTHING_WRONG, Toast.LENGTH_SHORT).show();
 //        }
 //    };
@@ -1039,11 +1060,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(getVideoListByPincode);
-
-//            changePincodeEvery10SecTesting();
-
         } else {
-
             Toast.makeText(mContext, "No Internet Connection", Toast.LENGTH_SHORT).show();
             CountDownTimer countDownTimerVideoDwnld = new CountDownTimer(30000, 30000) {
                 @Override
@@ -1054,11 +1071,9 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                 @Override
                 public void onFinish() {
                     getDataFromPincode(pincode);
-
                 }
             };
             countDownTimerVideoDwnld.start();
-
         }
         // }
     }
@@ -1080,9 +1095,9 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                     downloadVideos();
 
                 } else {
-                    
+
                     Toast.makeText(mContext, "No Videos For this Pincode", Toast.LENGTH_LONG).show();
-                    
+
                 }
             }else {
                 Toast.makeText(mContext, "No Videos For this Pincode", Toast.LENGTH_LONG).show();
@@ -1101,7 +1116,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                 @Override
                 public void onFinish() {
                     if(postalCode!=null)
-                    getDataFromPincode(postalCode);
+                        getDataFromPincode( postalCode);
                 }
             };
             countDownTimerVideoDwnld.start();
@@ -1151,7 +1166,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         @Override
         public void onError(Throwable e) {
             Log.e(TAG, "onError: getCampaignListByPincode >> " + e.toString());
-            
+
             Toast.makeText(mContext, ApplicationConstant.ANYTHING_WRONG, Toast.LENGTH_SHORT).show();
         }
     };
@@ -1199,7 +1214,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         @Override
         public void onError(Throwable e) {
             Log.e(TAG, "onError: getCampaignListByPincode >> " + e.toString());
-            
+
             Toast.makeText(mContext, ApplicationConstant.ANYTHING_WRONG, Toast.LENGTH_SHORT).show();
         }
     };
@@ -1246,7 +1261,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         @Override
         public void onError(Throwable e) {
             Log.e(TAG, "onError: getCampaignListByCITY >> " + e.toString());
-            
+
             Toast.makeText(mContext, ApplicationConstant.ANYTHING_WRONG, Toast.LENGTH_SHORT).show();
         }
     };
@@ -1254,21 +1269,21 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
     private void getPincode() {
         if(postalCode != null){
             ArrayList<Pincode> pinlist = myDB.getAllPincode(postalCode);
-              if (pinlist.size() == 0) {
-                  //if(subscriptionList.size()!=0) {
-                  if (Utils.isConnectingToInternet(mContext)) {
-                      onceSetPincode = false;
-                      cabTabDetailsViewHolder.getPincode()
-                              .subscribeOn(Schedulers.io())
-                              .observeOn(AndroidSchedulers.mainThread())
-                              .subscribe(getPincode);
-                  } else {
-                      Toast.makeText(mContext, "No Internet Connection", Toast.LENGTH_SHORT).show();
-                  }
+            if (pinlist.size() == 0) {
+                //if(subscriptionList.size()!=0) {
+                if (Utils.isConnectingToInternet(mContext)) {
+                    onceSetPincode = false;
+                    cabTabDetailsViewHolder.getPincode()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(getPincode);
+                } else {
+                    Toast.makeText(mContext, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
 
-          }else {
-                  getDataFromPincode(postalCode);
-              }
+            }else {
+                getDataFromPincode(postalCode);
+            }
         }else {
             if(myDB.getAllPincode().equals("")){
                 if (Utils.isConnectingToInternet(mContext)) {
@@ -1295,7 +1310,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
                 countDownTimer.start();
 
-        }
+            }
         }
         // }
     }
@@ -1333,8 +1348,8 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         @Override
         public void onError(Throwable e) {
             Log.e(TAG, "onError: Pinocdeerror >> " + e.toString());
-            
-           Toast.makeText(mContext, ApplicationConstant.ANYTHING_WRONG, Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(mContext, ApplicationConstant.ANYTHING_WRONG, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -1349,7 +1364,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             longitude = location.getLongitude();
             Double lattitude =0.0;
             lattitude = location.getLatitude();
-         //   Toast.makeText(mContext, + lattitude + ", " + longitude, Toast.LENGTH_SHORT).show();
+            //   Toast.makeText(mContext, + lattitude + ", " + longitude, Toast.LENGTH_SHORT).show();
             //Log.e(TAG, "Latttitude =================== " + lattitude + ",Longitude ================ " + longitude );
             if(longitude!=0.0 && lattitude!=0.0){
                 getLoc(lattitude,longitude);
@@ -1360,6 +1375,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         }
     }
 
+    @SuppressLint("MissingPermission")
     private  void  getLoc(Double lattitude,Double longitude)
     {
         hideSystemUI(getWindow());
@@ -1371,33 +1387,24 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
         if(lattitude!=0 && longitude!=0)
         {
             try {
-                addresses = geocoder.getFromLocation(lattitude, longitude, 10); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                if (addresses != null && !addresses.isEmpty()) {
+                addresses = geocoder.getFromLocation(lattitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                if (addresses != null) {
+                    String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                    String city = addresses.get(0).getLocality();
+                    String state = addresses.get(0).getAdminArea();
+                    String country = addresses.get(0).getCountryName();
+                    postalCodenew = addresses.get(0).getPostalCode();/*"42241";*/
+                    postalCodenew = postalCodenew.replaceAll(" ","");
+                    postalCodenew = postalCodenew.replaceAll("\\s+", "");
 
-                    for (int i = 0; i < addresses.size(); i++) {
-                        Address address = addresses.get(i);
-                        if (address.getPostalCode() != null) {
-                            postalCodenew = address.getPostalCode();
-
-                            break;
-                        }
-
-                    }
-
-                    Log.d(TAG, "your Postal code is"+postalCodenew);
-
-                    if(postalCodenew != null) {
-                        postalCodenew = postalCodenew.replaceAll(" ", "");
-                        postalCodenew = postalCodenew.replaceAll("\\s+", "");
-                    }else{
-                        postalCodenew = "440010";
-                    }
                     //postalCodenew  = "440005";
                     /*int max = 9999;
                     int min = 1000;
                     Random rand = new Random();
                     int randomNum = rand.nextInt((max - min) + 1) + min;
-                    postalCodenew = "44"+randomNum;*
+                    postalCodenew = "44"+randomNum;*/
+                    String knownName = addresses.get(0).getFeatureName();
+                    Log.e(TAG, "PostalCode ======================================== " + postalCodenew);
                    /* if(postalCode.equals("440013"))
                     {*/
 
@@ -1418,16 +1425,10 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                         temp_flag = true;
                         tempPostalCode = postalCode;
 
-                    }else{
-                        postalCode = postalCodenew;
                     }
                     //}
-                } else {
-
-                    Toast.makeText(mContext, "Pincode not found on map server...", Toast.LENGTH_SHORT).show();
-
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 Log.e(TAG, "Exception =========================================== " + e);
             }
         }
@@ -1533,19 +1534,19 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                                 }*/
 
 
-                             }
                             }
-                        }, 0);
+                        }
+                    }, 0);
 
                     Looper.loop();
-                    }
-                };
+                }
+            };
             thread.start();
 
-            }
+        }
         else
             Toast.makeText(mContext, "No Internet Connection", Toast.LENGTH_SHORT).show();
-        }
+    }
 
 
     public boolean dontDownloadExistingVideos(VideolistItem videolistItem)
@@ -1596,11 +1597,11 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
             if(flag){
 
-               // decodeVideo(path+video_path);
+                // decodeVideo(path+video_path);
                 int sizee = getVideoSize(path+videolistItem.getVideoUrl());
                 /*if(sizee!=Integer.parseInt(videolistItem.getVideoSize()))
                 flag = false;*/
-                if((sizee)-(Integer.parseInt(videolistItem.getVideoSize()))<=200 &&
+                if((sizee)-(Integer.parseInt(videolistItem.getVideoSize()))<=200 ||
                         (Integer.parseInt(videolistItem.getVideoSize())-sizee)<=200){
 
                 }else
@@ -1620,7 +1621,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             }
         }
 
-            return flag;
+        return flag;
 
     }
 
@@ -1698,112 +1699,105 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 //        urll = urll.replace("https://ensivosolutions.com/dummyvideo/","");
 //        call = downloadService2.downloadFileWithDynamicUrlAsync("http://madads.in/adminn/assets/uploaded-video/"+urll);
         //Localhost
+        String urll = videosListItem.get(count1).getVideoUrl();
+        if(!dontDownloadExistingVideos( videosListItem.get(count1)))
+        {
+            //urll = "http://madads.in/adminn/assets/uploaded-video/"+urll;
+            urll = "http://madads.in/maddy/assets/uploaded-video/"+urll;
 
-        try {
-            String urll = videosListItem.get(count1).getVideoUrl();
-            if(!dontDownloadExistingVideos( videosListItem.get(count1)))
-            {
-                //urll = "http://madads.in/adminn/assets/uploaded-video/"+urll;
-                urll = "http://madads.in/maddy/assets/uploaded-video/"+urll;
+            call = downloadService2.downloadFileWithDynamicUrlAsync(urll);
 
-                call = downloadService2.downloadFileWithDynamicUrlAsync(urll);
+            //Log.e(TAG,"i ==================== call ================================== "+i);
+            final int finalI = count1;
+            this.call.enqueue(new Callback<ResponseBody>() {
+                @SuppressLint("StaticFieldLeak")
+                @Override
+                public void onResponse(@NonNull final Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
 
-                //Log.e(TAG,"i ==================== call ================================== "+i);
-                final int finalI = count1;
-                this.call.enqueue(new Callback<ResponseBody>() {
-                    @SuppressLint("StaticFieldLeak")
-                    @Override
-                    public void onResponse(@NonNull final Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected Void doInBackground(Void... voids) {
 
-                        if (response.isSuccessful()) {
-                            new AsyncTask<Void, Void, Void>() {
-                                @Override
-                                protected Void doInBackground(Void... voids) {
+                                assert response.body() != null;
+                                if(videosListItem.size()>0){
+                                    if (finalI < (videosListItem.size())) {
+                                        Log.e(TAG, "doInBackground j = " + finalI);
+                                        boolean writtenToDisk = writeResponseBodyToDisk(response.body(), finalI);
+                                        if (writtenToDisk) {
 
-                                    assert response.body() != null;
-                                    if(videosListItem.size()>0){
-                                        if (finalI < (videosListItem.size())) {
-                                            Log.e(TAG, "doInBackground j = " + finalI);
-                                            boolean writtenToDisk = writeResponseBodyToDisk(response.body(), finalI);
-                                            if (writtenToDisk) {
+                                            Log.e(TAG, "server  file download was a success ? " + writtenToDisk);
 
-                                                Log.e(TAG, "server  file download was a success ? " + writtenToDisk);
-
-                                                myDB.createRecordsVideoList(Integer.parseInt(videosListItem.get(finalI).getVideoListId()),
-                                                        Integer.parseInt(videosListItem.get(finalI).getCustomerId()), videosListItem.get(finalI).getVideoName(),
-                                                        videosListItem.get(finalI).getVideoUrl(), videosListItem.get(finalI).getVideoDuration(),
-                                                        videosListItem.get(finalI).getVideoFormat(), videosListItem.get(finalI).getVideoType(), videosListItem.get(finalI).getVideoAdded(),videosListItem.get(finalI).getVideoSize());
-                                                if (finalI < videosListItem.size()-1) {
-                                                    l = finalI;
-                                                    l++;
-                                                    if(videosListItem.size() > l) {
-                                                        calfunction(downloadService2, l);
-                                                    }
+                                            myDB.createRecordsVideoList(Integer.parseInt(videosListItem.get(finalI).getVideoListId()),
+                                                    Integer.parseInt(videosListItem.get(finalI).getCustomerId()), videosListItem.get(finalI).getVideoName(),
+                                                    videosListItem.get(finalI).getVideoUrl(), videosListItem.get(finalI).getVideoDuration(),
+                                                    videosListItem.get(finalI).getVideoFormat(), videosListItem.get(finalI).getVideoType(), videosListItem.get(finalI).getVideoAdded(),videosListItem.get(finalI).getVideoSize());
+                                            if (finalI < videosListItem.size()-1) {
+                                                l = finalI;
+                                                l++;
+                                                if(videosListItem.size() > l) {
+                                                    calfunction(downloadService2, l);
                                                 }
-                                                else
-                                                {
-                                                    intentCall();
-                                                }
-                                            }else {
-                                                calfunction(downloadService2,finalI);
                                             }
+                                            else
+                                            {
+                                                intentCall();
+                                            }
+                                        }else {
+                                            calfunction(downloadService2,finalI);
                                         }
                                     }
-                                    else {
-                                        downloadVideos();
-                                    }
-
-                                    return null;
+                                }
+                                else {
+                                    downloadVideos();
                                 }
 
-                                @Override
-                                protected void onProgressUpdate(Void... values) {
-                                }
-
-                                @Override
-                                protected void onPostExecute(Void aVoid) {
-                                    Log.e(TAG, "size = 0 >>>>>>>>>>>>>>>> onPostExecute j = " + finalI);
-                                }
-                            }.execute();
-
-                        } else {
-
-                            Log.e(TAG, "callFunction server contact failed");
-                            l = l+1;
-                            if(videosListItem.size() > l) {
-                                calfunction(downloadService2, l);
+                                return null;
                             }
+
+                            @Override
+                            protected void onProgressUpdate(Void... values) {
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                Log.e(TAG, "size = 0 >>>>>>>>>>>>>>>> onPostExecute j = " + finalI);
+                            }
+                        }.execute();
+
+                    } else {
+
+                        Log.e(TAG, "callFunction server contact failed");
+                        l = l+1;
+                        if(videosListItem.size() > l) {
+                            calfunction(downloadService2, l);
                         }
                     }
+                }
 
-                    @Override
-                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                        Log.e(TAG, "Server  error");
-                    }
-                });
-            }
-            else
-            {
-                videoIds= videoIds + videosListItem.get(count1).getVideoListId() + " , ";
+                @Override
+                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                    Log.e(TAG, "Server  error");
+                }
+            });
+        }
+        else
+        {
+            videoIds= videoIds + videosListItem.get(count1).getVideoListId() + " , ";
 //            myDB.createRecordsVideoList(Integer.parseInt(videosListItem.get(count1).getVideoListId()),
 //                    Integer.parseInt(videosListItem.get(count1).getCustomerId()), videosListItem.get(count1).getVideoName(),
 //                    videosListItem.get(count1).getVideoUrl(), videosListItem.get(count1).getVideoDuration(),
 //                    videosListItem.get(count1).getVideoFormat(), videosListItem.get(count1).getVideoType(),
 //                    videosListItem.get(count1).getVideoAdded());
 
-                l = l+1;
-                if(l<videosListItem.size())
-                {
-                    calfunction(downloadService2, l);
-                }
-                else{
-                    delelteVideos();
-                }
+            l = l+1;
+            if(l<videosListItem.size())
+            {
+                calfunction(downloadService2, l);
             }
-        } catch (Exception e){
-
-            Toast.makeText(mContext, "No videos Found!", Toast.LENGTH_SHORT).show();
-
+            else{
+                delelteVideos();
+            }
         }
     }
 
@@ -1814,7 +1808,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                  //  progressBar =  findViewById(R.id.progressBar_splash);
+                    //  progressBar =  findViewById(R.id.progressBar_splash);
                     progressBar.setVisibility(VISIBLE);
                     progressBar.setProgress(0);
                     //progressBar.getIndeterminateDrawable().setColorFilter(0xFFFF0000,android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -1910,14 +1904,14 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                         imageFile = null;
                         String path = Environment.getExternalStorageDirectory().toString()+"/Madads/";
                         int sizee = getVideoSize(path+videosListItem.get(j).getVideoUrl());
-                      //  if(sizee==Integer.parseInt(videolistItem.getVideoSize()))
+                        //  if(sizee==Integer.parseInt(videolistItem.getVideoSize()))
 
                         //int sizee = myDB.getVideoSizeById(videosListItem.get(j).getVideoListId()).get(0);
                         if(sizee!=Integer.parseInt(videosListItem.get(j).getVideoSize()))
                         {
                             if((sizee)-(Integer.parseInt(videosListItem.get(j).getVideoSize()))<=200 ||
                                     (Integer.parseInt(videosListItem.get(j).getVideoSize())-sizee)<=200){
-                            return true;
+                                return true;
                             }
                             else{
                                 File fdelete = new File(videosListItem.get(j).getVideoUrl());
@@ -1932,9 +1926,9 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                                 return false;
                             }
 
-                            }
+                        }
                         else
-                        return true;
+                            return true;
 
                     }else {
                         File fdelete = new File(mCurrentPhotoPath);
@@ -1980,7 +1974,7 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             File fdelete = new File(mCurrentPhotoPath);
             if (fdelete.exists()) {
                 if (fdelete.delete()) {
@@ -2020,90 +2014,90 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             final int random = new Random().nextInt((max - min) + 1) + min;
             String folder_main = "MadadsApk";
 
-                // todo change the file location/name according to your needs
-                File imageFile = null;
+            // todo change the file location/name according to your needs
+            File imageFile = null;
 
-                imageFile = new File(Environment.getExternalStorageDirectory()
-                        + "/" + folder_main,File.separator + "madads.apk");
-                mCurrentPhotoPath = imageFile.getAbsolutePath();
+            imageFile = new File(Environment.getExternalStorageDirectory()
+                    + "/" + folder_main,File.separator + "madads.apk");
+            mCurrentPhotoPath = imageFile.getAbsolutePath();
 
-                InputStream inputStream = null;
-                OutputStream outputStream = null;
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
 
-                try {
-                    byte[] fileReader = new byte[4096];
+            try {
+                byte[] fileReader = new byte[4096];
 
-                    long fileSize = body.contentLength();
+                long fileSize = body.contentLength();
 
-                    progressBar.setMax((int) fileSize);
-                    long fileSizeDownloaded = 0;
+                progressBar.setMax((int) fileSize);
+                long fileSizeDownloaded = 0;
 
-                    inputStream = body.byteStream();
-                    outputStream = new FileOutputStream(imageFile);
-                    Log.e(TAG, "imageFile [ " + " ] ==================== " + imageFile.getName());
+                inputStream = body.byteStream();
+                outputStream = new FileOutputStream(imageFile);
+                Log.e(TAG, "imageFile [ " + " ] ==================== " + imageFile.getName());
 
-                    while (true) {
-                        int read = inputStream.read(fileReader);
+                while (true) {
+                    int read = inputStream.read(fileReader);
 
-                        if (read == -1) {
-                            break;
-                        }
-
-                        outputStream.write(fileReader, 0, read);
-
-                        fileSizeDownloaded += read;
-                        final long finalFileSizeDownloaded = fileSizeDownloaded;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setProgress((int) finalFileSizeDownloaded);
-                            }
-                        });
-                        //Log.e(TAG, "file download: "+imageFile.getName() +" >>> "+ fileSizeDownloaded + " of " + fileSize);
+                    if (read == -1) {
+                        break;
                     }
+
+                    outputStream.write(fileReader, 0, read);
+
+                    fileSizeDownloaded += read;
+                    final long finalFileSizeDownloaded = fileSizeDownloaded;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress((int) finalFileSizeDownloaded);
+                        }
+                    });
+                    //Log.e(TAG, "file download: "+imageFile.getName() +" >>> "+ fileSizeDownloaded + " of " + fileSize);
+                }
 //                    MediaMetadataRetriever retriever = new MediaMetadataRetriever();
 ////use one of overloaded setDataSource() functions to set your data source
 //                    retriever.setDataSource(mContext, Uri.fromFile(imageFile));
 //                    String time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
 //                    long timeInMillisec = Long.parseLong(time );
-                    Log.e(TAG, "file download: "+imageFile.getName() +" >>> "+ fileSizeDownloaded + " of " + fileSize +"duration");
+                Log.e(TAG, "file download: "+imageFile.getName() +" >>> "+ fileSizeDownloaded + " of " + fileSize +"duration");
 //                    retriever.release();
 //                    outputStream.flush();
-                    if(fileSize == fileSizeDownloaded) {
-                        previousDownload = true;
+                if(fileSize == fileSizeDownloaded) {
+                    previousDownload = true;
 
-                        name_ = imageFile.getAbsolutePath();
+                    name_ = imageFile.getAbsolutePath();
 
-                        return_flag = false;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setVisibility(ProgressBar.GONE);
+                    return_flag = false;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(ProgressBar.GONE);
 
-                            }
-                        });
+                        }
+                    });
 
-                        imageFile = null;
-                        return true;
-                    }else {
-
-                        return false;
-                    }
-
-                } catch (IOException e) {
-                    Log.e("-->", "IOException :" + e);
+                    imageFile = null;
+                    return true;
+                }else {
 
                     return false;
-                } finally {
-                    if (inputStream != null) {
-                        inputStream.close();
-                    }
-
-                    if (outputStream != null) {
-                        outputStream.close();
-
-                    }
                 }
+
+            } catch (IOException e) {
+                Log.e("-->", "IOException :" + e);
+
+                return false;
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+
+                if (outputStream != null) {
+                    outputStream.close();
+
+                }
+            }
 
         } catch (IOException e) {
             Log.e("-->", "IOException :" + e);
@@ -2125,21 +2119,21 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_AVR_POWER) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_POWER) {
             Log.i("", "Dispath event power");
             Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
             sendBroadcast(closeDialog);
-            return false;
+            return true;
         }
-        return false;
+        return super.dispatchKeyEvent(event);
     }
 
     public void intentCall()
     {
         Log.e(TAG,"Intent_______________________________________________________________________");
 
-       Intent intent = new Intent(SplashActivity.this,TempClass.class);
-       // Intent intent = new Intent(SplashActivity.this,VideoFaceDetectionActivity.class);
+        Intent intent = new Intent(SplashActivity.this,TempClass.class);
+        // Intent intent = new Intent(SplashActivity.this,VideoFaceDetectionActivity.class);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         startActivity(intent);
         finish();
@@ -2189,7 +2183,6 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
                         try {
 
                             // Use reflection to trigger a method from 'StatusBarManager'
-                            @SuppressLint("WrongConstant")
                             Object statusBarService = context.getSystemService("statusbar");
                             Class<?> statusBarManager = null;
 
@@ -2247,8 +2240,5 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
             }
         }
     }
-
-
-
 
 }

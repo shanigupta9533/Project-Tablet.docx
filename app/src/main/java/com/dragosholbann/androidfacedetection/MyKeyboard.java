@@ -29,7 +29,6 @@ public class MyKeyboard extends LinearLayout implements View.OnClickListener {
     }
 
 
-
     // keyboard keys (buttons)
     private Button mButton1;
     private Button mButton2;

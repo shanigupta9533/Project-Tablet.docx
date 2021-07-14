@@ -28,8 +28,6 @@ public class MyFaceDetector extends Detector<Face> {
         byte[] jpegArray = byteArrayOutputStream.toByteArray();
         TempBitmap = BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.length);
 
-
-
         //TempBitmap is a Bitmap version of a frame which is currently captured by your CameraSource in real-time
         //So you can process this TempBitmap in your own purposes adding extra code here
 
