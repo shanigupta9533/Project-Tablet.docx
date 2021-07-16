@@ -1355,8 +1355,6 @@ public class TempClass extends AppCompatActivity implements android.location.Loc
 
         }*/
 
-        Toast.makeText(getApplicationContext(), "onPAUSE", Toast.LENGTH_LONG).show();
-
         if (onPauseFlag) {
 
             popupWindowBrightness = null;
@@ -1441,6 +1439,7 @@ public class TempClass extends AppCompatActivity implements android.location.Loc
 
     @Override
     public boolean onKeyDown(View view, Editable text, int keyCode, KeyEvent event) {
+
         return false;
     }
 

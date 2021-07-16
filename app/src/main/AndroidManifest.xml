@@ -7,51 +7,60 @@
     <uses-feature
         android:name="android.hardware.camera.front"
         android:required="false" />
+
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
 
-    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
-    <uses-permission android:name="android.permission.REORDER_TASKS"/>
-<!--    <action android:name="android.intent.action.SCREEN_OFF"/>
-    <action android:name="android.intent.action.SCREEN_ON"/>-->
-    <uses-permission android:name="android:permission.BIND_DEVICE_ADMIN"/>
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <!--    <action android:name="android.intent.action.SCREEN_OFF"/>
+        <action android:name="android.intent.action.SCREEN_ON"/>-->
+    <uses-permission android:name="android:permission.BIND_DEVICE_ADMIN" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"
-        /><uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:required="false"  android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
+
     <uses-permission android:name="android.permission.PREVENT_POWER_KEY" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission
+        android:name="android.permission.CHANGE_CONFIGURATION"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:windowSoftInputMode="adjustPan|adjustResize"
-        android:requestLegacyExternalStorage="true"
-        android:clearTaskOnLaunch="true"
-        android:largeHeap="true"
-        android:hardwareAccelerated="false"
         android:allowBackup="true"
+        android:clearTaskOnLaunch="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/ads"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/ads"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustPan|adjustResize"
         tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -62,27 +71,27 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.dragosholbann.androidfacedetection.SplashActivity"
+        <activity
+            android:name="com.dragosholbann.androidfacedetection.SplashActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize"
-            >
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                &lt;!&ndash;<category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT"/>&ndash;&gt;
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            android:windowSoftInputMode="adjustResize">
+<!--            &lt;!&ndash;<intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                &lt;!&ndash;<category android:name="android.intent.category.HOME" />-->
+<!--                <category android:name="android.intent.category.DEFAULT"/>&ndash;&gt;-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>&ndash;&gt;-->
         </activity>
 
         <activity
             android:name="com.dragosholbann.androidfacedetection.SmsActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -97,48 +106,57 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="com.dragosholbann.androidfacedetection.FaceDetectionActivity"
+        <activity
+            android:name="com.dragosholbann.androidfacedetection.FaceDetectionActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name="com.dragosholbann.androidfacedetection.VideoFaceDetectionActivity"
+        <activity
+            android:name="com.dragosholbann.androidfacedetection.VideoFaceDetectionActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name="com.dragosholbann.androidfacedetection.TempClass"
+        <activity
+            android:name="com.dragosholbann.androidfacedetection.TempClass"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize">
 
-        <activity android:name="com.dragosholbann.androidfacedetection.MainActivity"
+        </activity>
+
+        <activity
+            android:name="com.dragosholbann.androidfacedetection.MainActivity"
             android:configChanges="screenLayout|screenSize|orientation"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name="com.dragosholbann.androidfacedetection.AndroidDatabaseManager"
-            android:screenOrientation="landscape"            />
+        <activity
+            android:name="com.dragosholbann.androidfacedetection.AndroidDatabaseManager"
+            android:screenOrientation="landscape" />
 
-        <receiver android:name=".MyAdmin"
-            android:label="@string/sample_device_admin"
+        <receiver
+            android:name=".MyAdmin"
             android:description="@string/sample_device_admin_description"
+            android:label="@string/sample_device_admin"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data android:name="android.app.device_admin"
+            <meta-data
+                android:name="android.app.device_admin"
                 android:resource="@xml/device_admin" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".BootReceiver" android:enabled="true" android:exported="true">
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <!--For HTC devices-->
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
 

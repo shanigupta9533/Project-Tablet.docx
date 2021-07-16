@@ -264,6 +264,9 @@ public class SplashActivity extends AppCompatActivity implements android.locatio
 
     @Override
     public void onBackPressed() {
+
+
+
     }
 
 
